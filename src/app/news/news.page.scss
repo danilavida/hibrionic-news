@@ -60,9 +60,9 @@ ion-card-content::after {
 ion-content {
     --background: linear-gradient(
         to bottom,
-        rgba(var(--ion-color-primary-rgb), 0.1),
-        rgba(var(--ion-color-primary-rgb), 0.05) 30%,
-        #3880ff 70%
+        rgba(var(--ion-color-primary-rgb), 0.4),
+        rgba(var(--ion-color-primary-rgb), 0.05) 3%,
+        #005eff 95%
     );
 }
 
@@ -81,3 +81,18 @@ ion-header ion-toolbar ion-title {
     // align-items: center;
     // padding: 0 50px;
 }
+
+/* --- Estilos para el Contenedor de la Lista en Escritorio --- */
+
+// Usamos una media query para aplicar estos estilos solo en pantallas
+// más grandes que un móvil típico (ej: 768px o 992px). Ajusta el valor si es necesario.
+@media (min-width: 768px) {
+    .news-list-container {
+        // Define un ancho máximo para el contenido en pantallas grandes
+        max-width: 800px; // Puedes ajustar este valor (ej: 700px, 900px)
+
+        // Centra el contenedor horizontalmente cuando la pantalla sea más ancha que max-width
+        margin-left: auto;
+        margin-right: auto;
+    }
+} // Fin de la media query
