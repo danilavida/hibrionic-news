@@ -2,7 +2,7 @@
     <ion-toolbar color="primary"> <ion-title> News </ion-title> </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
     <ion-header collapse="condense">
         <ion-toolbar color="primary">
             <ion-title size="large">News</ion-title>
@@ -28,7 +28,6 @@
             <p>{{ noticia.descripcion }}</p>
 
             <ion-button
-                expand="block"
                 color="danger"
                 (click)="eliminarNoticia(noticia)"
                 class="ion-margin-top"

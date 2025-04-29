@@ -48,9 +48,9 @@ export class NewsPage {
             titulo: 'Primera Noticia Importante',
             fecha: '2025-04-28', // Fecha de ejemplo
             descripcion:
-                'Este es el cuerpo de la primera noticia. Contiene detalles relevantes sobre el acontecimiento.',
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             imagenUrl:
-                'https://ichef.bbci.co.uk/ace/ws/770/cpsprodpb/396d/live/e68ec0c0-2489-11f0-aed7-4db8457b3c2c.jpg.webp' // Usa tu propia imagen o déjalo vacío
+                'https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1196/b_white/f_auto/q_auto/ncom/software/switch/70010000000025/7137262b5a64d921e193653f8aa0b722925abc5680380ca0e18a5cfd91697f58'
         },
         {
             id: '2',
@@ -59,7 +59,7 @@ export class NewsPage {
             descripcion:
                 'Se esperan cielos despejados para Matamoros durante el resto de la semana.',
             imagenUrl:
-                'https://ichef.bbci.co.uk/ace/ws/770/cpsprodpb/396d/live/e68ec0c0-2489-11f0-aed7-4db8457b3c2c.jpg.webp'
+                'https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1196/b_white/f_auto/q_auto/ncom/software/switch/70010000000025/7137262b5a64d921e193653f8aa0b722925abc5680380ca0e18a5cfd91697f58'
         },
         {
             id: '3',
@@ -68,7 +68,7 @@ export class NewsPage {
             descripcion:
                 'Nuevas características anunciadas para la próxima generación de dispositivos.',
             imagenUrl:
-                'https://ichef.bbci.co.uk/ace/ws/770/cpsprodpb/396d/live/e68ec0c0-2489-11f0-aed7-4db8457b3c2c.jpg.webp'
+                'https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1196/b_white/f_auto/q_auto/ncom/software/switch/70010000000025/7137262b5a64d921e193653f8aa0b722925abc5680380ca0e18a5cfd91697f58'
         }
     ]
 
