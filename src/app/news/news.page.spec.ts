@@ -5,7 +5,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { NewsPage } from './news.page'
 
-describe('Tab1Page', () => {
+describe('NewsPage', () => {
     let component: NewsPage
     let fixture: ComponentFixture<NewsPage>
 

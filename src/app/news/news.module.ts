@@ -17,4 +17,4 @@ import { NewsPageRoutingModule } from './news-routing.module'
     ],
     declarations: [NewsPage]
 })
-export class Tab1PageModule {}
+export class NewsPageModule {}

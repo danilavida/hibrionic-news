@@ -10,23 +10,23 @@ const routes: Routes = [
             {
                 path: 'news',
                 loadChildren: () =>
-                    import('../news/news.module').then((m) => m.Tab1PageModule)
+                    import('../news/news.module').then((m) => m.NewsPageModule)
             },
             {
-                path: 'tab2',
+                path: 'addNews',
                 loadChildren: () =>
-                    import('../tab2/tab2.module').then((m) => m.Tab2PageModule)
+                    import('../addNews/addNews.module').then((m) => m.AddNewsPageModule)
             },
             {
                 path: '',
-                redirectTo: '/tabs/tab1',
+                redirectTo: '/tabs/news',
                 pathMatch: 'full'
             }
         ]
     },
     {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/news',
         pathMatch: 'full'
     }
 ]
