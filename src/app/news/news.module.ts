@@ -13,8 +13,9 @@ import { NewsPageRoutingModule } from './news-routing.module'
         CommonModule,
         FormsModule,
         ExploreContainerComponentModule,
-        NewsPageRoutingModule
+        NewsPageRoutingModule,
+        NewsPage // Importar NewsPage aquí
     ],
-    declarations: [NewsPage]
+    declarations: []
 })
 export class NewsPageModule {}

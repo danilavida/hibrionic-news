@@ -11,8 +11,8 @@ describe('NewsPage', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [NewsPage],
-            imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
+            declarations: [],
+            imports: [IonicModule.forRoot(), ExploreContainerComponentModule, NewsPage]
         }).compileComponents()
 
         fixture = TestBed.createComponent(NewsPage)
