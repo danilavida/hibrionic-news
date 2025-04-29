@@ -1,0 +1,8 @@
+{
+  "name": "Hibrionic News",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "47090b55"
+}
