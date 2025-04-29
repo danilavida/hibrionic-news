@@ -49,15 +49,17 @@ export class NewsPage {
             fecha: '2025-04-28', // Fecha de ejemplo
             descripcion:
                 'Este es el cuerpo de la primera noticia. Contiene detalles relevantes sobre el acontecimiento.',
-            imagenUrl: 'assets/icon/favicon.png' // Usa tu propia imagen o déjalo vacío
+            imagenUrl:
+                'https://ichef.bbci.co.uk/ace/ws/770/cpsprodpb/396d/live/e68ec0c0-2489-11f0-aed7-4db8457b3c2c.jpg.webp' // Usa tu propia imagen o déjalo vacío
         },
         {
             id: '2',
             titulo: 'Actualización del Clima Local',
             fecha: '2025-04-27',
             descripcion:
-                'Se esperan cielos despejados para Matamoros durante el resto de la semana.'
-            // imagenUrl: 'https://via.placeholder.com/300x150' // Ejemplo con URL externa
+                'Se esperan cielos despejados para Matamoros durante el resto de la semana.',
+            imagenUrl:
+                'https://ichef.bbci.co.uk/ace/ws/770/cpsprodpb/396d/live/e68ec0c0-2489-11f0-aed7-4db8457b3c2c.jpg.webp'
         },
         {
             id: '3',
@@ -65,7 +67,8 @@ export class NewsPage {
             fecha: '2025-04-26',
             descripcion:
                 'Nuevas características anunciadas para la próxima generación de dispositivos.',
-            imagenUrl: 'assets/shapes.svg' // Otra imagen local de ejemplo
+            imagenUrl:
+                'https://ichef.bbci.co.uk/ace/ws/770/cpsprodpb/396d/live/e68ec0c0-2489-11f0-aed7-4db8457b3c2c.jpg.webp'
         }
     ]
 
