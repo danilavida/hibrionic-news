@@ -15,15 +15,14 @@ import {
     IonModal,
     IonDatetime,
     IonButton,
-    IonIcon
-} from '@ionic/angular/standalone'
+    IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone'
 
 @Component({
     selector: 'app-addNews',
     templateUrl: 'addNews.page.html',
     styleUrls: ['addNews.page.scss'],
     standalone: true,
-    imports: [
+    imports: [IonCardContent, IonCardTitle, IonCardHeader, IonCard, 
         FormsModule,
         CommonModule,
         IonHeader,

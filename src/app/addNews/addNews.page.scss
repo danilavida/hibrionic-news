@@ -2,64 +2,86 @@
 
 /* --- Estilos del Fondo con Gradiente Azul Suave --- */
 ion-content {
-    // Aplicamos el gradiente directamente al fondo
-    // Ajusta los colores/paradas según tu preferencia
     --background: linear-gradient(
         to bottom,
         rgba(var(--ion-color-primary-rgb), 0.4),
-        // Azul primario más opaco al inicio
         rgba(var(--ion-color-primary-rgb), 0.05) 30%,
-        // Se desvanece rápido
-        #ffffff 70% // Termina en blanco (o var(--ion-color-secondary) para gris claro)
+        #ffffff 70% // <- O var(--ion-color-secondary)
     );
 }
 
 /* --- Centrar Título del Header --- */
 ion-header ion-toolbar ion-title {
     text-align: center;
-    // Descomenta la alternativa si text-align no es suficiente
-    /*
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    display: flex; justify-content: center; align-items: center;
-    padding: 0 50px;
-    */
 }
 
 /* --- Estilos para el Contenedor del Formulario en Escritorio --- */
 @media (min-width: 768px) {
     .add-news-form-container {
-        max-width: 600px; // Ancho máximo del formulario en escritorio
+        max-width: 600px;
         margin-left: auto;
         margin-right: auto;
-        padding-top: 20px; // Espacio superior opcional
+        padding-top: 20px;
     }
 }
 
-/* --- Estilos específicos del formulario (Opcional) --- */
-ion-list {
-    // Quita fondos para que se vea el gradiente
+/* --- Estilos para la Tarjeta del Formulario --- */
+.add-news-form-container ion-card {
+    // Fondo para la tarjeta (puedes probar diferentes opacidades o colores)
+    // background-color: rgba(255, 255, 255, 0.85); // Blanco semi-transparente
+    background-color: var(--ion-color-light); // O usar el gris claro de la paleta
+
+    border-radius: 15px; // Mismo radio que las tarjetas de noticias
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Sombra suave
+    border: 1px solid var(--ion-color-medium-tint); // Borde sutil opcional
+    margin-bottom: 20px; // Margen inferior para la tarjeta
+}
+
+.add-news-form-container ion-card-header {
+    // Puedes añadir padding aquí si quieres más espacio para el título de la tarjeta
+    padding-bottom: 0; // Quizás menos padding aquí
+}
+
+.add-news-form-container ion-card-content {
+    // Padding dentro del contenido de la tarjeta
+    padding-top: 0;
+}
+
+/* --- Estilos específicos del formulario DENTRO de la tarjeta --- */
+.add-news-form-container ion-list {
+    // La lista dentro de la tarjeta puede tener fondo transparente
     background: transparent;
-    --ion-item-background: transparent;
-    padding-top: 10px; // Un poco de espacio antes del primer item
+    // Quitamos padding superior ya que el card-content puede tenerlo
+    padding-top: 0;
 }
 
-ion-item {
-    // --border-color: rgba(var(--ion-color-medium-rgb), 0.3); // Borde sutil opcional
-    // border-radius: 8px; // Esquinas redondeadas opcional
-    margin-bottom: 12px; // Espacio entre items del formulario
-    // Para que el fondo transparente aplique correctamente:
+.add-news-form-container ion-item {
+    // Fondo transparente para los items dentro de la tarjeta
     --background: transparent;
+    margin-bottom: 16px; // Más espacio entre items
+    // Puedes añadir una línea inferior sutil si quieres separar los campos
+    --border-color: rgba(var(--ion-color-medium-rgb), 0.3);
+    // Asegura que no haya padding extra que descuadre
+    --inner-padding-end: 0px;
+    --inner-padding-start: 0px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
-// Ajuste para que el label flotante tenga buen contraste
-ion-item.item-label-floating .label-floating {
+.add-news-form-container ion-item.item-label-floating .label-floating {
     color: var(--ion-color-medium-shade);
 }
 
-// Puedes añadir más estilos para los inputs, textarea, etc. si lo deseas
-ion-input,
-ion-textarea {
-    // background-color: rgba(255, 255, 255, 0.8); // Fondo semi-transparente opcional
+// Estilos opcionales para Inputs/Textarea dentro de la tarjeta
+.add-news-form-container ion-input,
+.add-news-form-container ion-textarea {
+    // Quizás un fondo muy sutil para el campo de entrada
+    // background-color: rgba(var(--ion-color-medium-rgb), 0.1);
     // border-radius: 5px;
+    // padding: 5px 8px !important; // Forzar padding si es necesario
+}
+
+// Ajuste al botón dentro de la tarjeta
+.add-news-form-container ion-button {
+    margin-top: 16px; // Margen sobre el botón
 }
