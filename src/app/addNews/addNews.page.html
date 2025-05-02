@@ -14,7 +14,7 @@
     <div class="add-news-form-container">
         <ion-card>
             <ion-card-header>
-                <ion-card-title><b>Detalles de la Noticia</b></ion-card-title>
+                <ion-card-title>Detalles de la Noticia</ion-card-title>
             </ion-card-header>
 
             <ion-card-content>
@@ -45,6 +45,16 @@
                         >
                         </ion-textarea>
                     </ion-item>
+
+                    <ion-item>
+                        <ion-label position="floating">URL de Imagen (Opcional)</ion-label>
+                        <ion-input
+                            type="url"
+                            [(ngModel)]="noticiaImagenUrl"
+                            name="imagenUrl"
+                        >
+                        </ion-input>
+                    </ion-item>
                 </ion-list>
 
                 <ion-button
@@ -59,6 +69,7 @@
             </ion-card-content>
         </ion-card>
     </div>
+
     <ion-modal
         [keepContentsMounted]="true"
         [isOpen]="isDatePickerOpen"

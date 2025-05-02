@@ -1,9 +1,11 @@
-import { Component } from '@angular/core'
-// Importa la interfaz Noticia desde tu archivo de modelos
-import { Noticia } from '../models/noticia.model'
-// Importar CommonModule para *ngIf y *ngFor
+// Importa inject y EnvironmentInjector desde @angular/core
+import { Component, OnInit, inject, EnvironmentInjector } from '@angular/core'
+import { Observable } from 'rxjs'
 import { CommonModule } from '@angular/common'
-// Importar los componentes de Ionic necesarios de forma individual
+
+import { NoticiasService } from '../services/noticias.service'
+import { Noticia } from '../models/noticia.model'
+
 import {
     IonHeader,
     IonToolbar,
@@ -15,17 +17,18 @@ import {
     IonCardSubtitle,
     IonCardContent,
     IonButton,
-    IonIcon
+    IonIcon,
+    AlertController,
+    ToastController
 } from '@ionic/angular/standalone'
 
 @Component({
-    selector: 'app-news', // Asegúrate que este selector coincide
+    selector: 'app-news',
     templateUrl: 'news.page.html',
     styleUrls: ['news.page.scss'],
-    standalone: true, // Esto indica que el componente es independiente
-    // Añadir imports para las dependencias del template
+    standalone: true,
     imports: [
-        CommonModule, // Para *ngIf, *ngFor, etc.
+        CommonModule,
         IonHeader,
         IonToolbar,
         IonTitle,
@@ -39,47 +42,94 @@ import {
         IonIcon
     ]
 })
-export class NewsPage {
-    // Array para guardar las noticias (con datos de ejemplo)
-    // Asegúrate que la ruta a la imagen sea válida en tu proyecto o usa una URL externa
-    noticias: Noticia[] = [
-        {
-            id: '1', // Agregamos IDs de ejemplo
-            titulo: 'Primera Noticia Importante',
-            fecha: '2025-04-28', // Fecha de ejemplo
-            descripcion:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            imagenUrl:
-                'https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1196/b_white/f_auto/q_auto/ncom/software/switch/70010000000025/7137262b5a64d921e193653f8aa0b722925abc5680380ca0e18a5cfd91697f58'
-        },
-        {
-            id: '2',
-            titulo: 'Actualización del Clima Local',
-            fecha: '2025-04-27',
-            descripcion:
-                'Se esperan cielos despejados para Matamoros durante el resto de la semana.',
-            imagenUrl:
-                'https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1196/b_white/f_auto/q_auto/ncom/software/switch/70010000000025/7137262b5a64d921e193653f8aa0b722925abc5680380ca0e18a5cfd91697f58'
-        },
-        {
-            id: '3',
-            titulo: 'Avances en Tecnología Móvil',
-            fecha: '2025-04-26',
-            descripcion:
-                'Nuevas características anunciadas para la próxima generación de dispositivos.',
-            imagenUrl:
-                'https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1196/b_white/f_auto/q_auto/ncom/software/switch/70010000000025/7137262b5a64d921e193653f8aa0b722925abc5680380ca0e18a5cfd91697f58'
+export class NewsPage implements OnInit {
+    public noticias$: Observable<Noticia[]>
+
+    // --- 1. Inyecta EnvironmentInjector usando inject() ---
+    private environmentInjector = inject(EnvironmentInjector)
+
+    constructor(
+        private noticiasService: NoticiasService,
+        private alertCtrl: AlertController,
+        private toastCtrl: ToastController
+    ) {
+        this.noticias$ = new Observable<Noticia[]>()
+    }
+
+    ngOnInit() {
+        this.noticias$ = this.noticiasService.getNoticias()
+    }
+
+    // Método principal que muestra la alerta (sin cambios aquí)
+    async eliminarNoticia(noticiaParaEliminar: Noticia) {
+        console.log('Debug: Intentando eliminar:', noticiaParaEliminar)
+        console.log('Debug: ID recibido para eliminar:', noticiaParaEliminar.id)
+
+        if (!noticiaParaEliminar.id) {
+            console.error('Debug: Error: ID de noticia no encontrado para eliminar.')
+            this.mostrarToast('Error: No se pudo identificar la noticia.', 'danger')
+            return
         }
-    ]
 
-    constructor() {}
+        const alert = await this.alertCtrl.create({
+            header: 'Confirmar Borrado',
+            message: `¿Estás seguro de que deseas eliminar la noticia "${noticiaParaEliminar.titulo}"?`,
+            buttons: [
+                {
+                    text: 'Cancelar',
+                    role: 'cancel',
+                    cssClass: 'secondary'
+                },
+                {
+                    text: 'Eliminar',
+                    cssClass: 'danger',
+                    handler: () => {
+                        // Llama al método privado
+                        console.log(
+                            `Debug: Alert handler confirmado para ID: ${noticiaParaEliminar.id!}`
+                        )
+                        this._borrarNoticiaConfirmado(noticiaParaEliminar.id!)
+                    }
+                }
+            ]
+        })
+        await alert.present()
+    }
 
-    // Método para eliminar la noticia (lógica de Firebase vendrá después)
-    eliminarNoticia(noticiaParaEliminar: Noticia) {
-        console.log('Intentando eliminar noticia:', noticiaParaEliminar)
-        // Aquí, más adelante, llamarás al servicio que interactúa con Firebase
-        // Por ahora, podríamos simular la eliminación del array local:
-        // this.noticias = this.noticias.filter(noticia => noticia.id !== noticiaParaEliminar.id);
-        alert(`Noticia "${noticiaParaEliminar.titulo}" marcada para eliminar.`) // Feedback visual temporal
+    // Método privado que ejecuta la lógica de borrado
+    private _borrarNoticiaConfirmado(id: string) {
+        // --- 2. Ejecuta la llamada al servicio DENTRO de runInContext ---
+        this.environmentInjector.runInContext(async () => {
+            try {
+                console.log(
+                    `Debug: _borrarNoticiaConfirmado - Llamando a deleteNoticia con ID: ${id}`
+                )
+                // La llamada al servicio ahora está envuelta
+                await this.noticiasService.deleteNoticia(id)
+                console.log(
+                    'Debug: _borrarNoticiaConfirmado - Llamada a deleteNoticia completada.'
+                )
+                // Mostrar toast también necesita contexto si usa DI internamente, así que lo dejamos dentro
+                this.mostrarToast('Noticia eliminada correctamente.', 'success')
+            } catch (error) {
+                console.error('Debug: ERROR DETALLADO en _borrarNoticiaConfirmado:', error)
+                // Mostrar toast también necesita contexto si usa DI internamente
+                this.mostrarToast('Error al eliminar la noticia.', 'danger')
+            }
+        }) // --- Fin de runInContext ---
+    }
+
+    // Método auxiliar para mostrar Toast (sin cambios)
+    async mostrarToast(
+        mensaje: string,
+        color: 'success' | 'danger' | 'warning' | 'primary'
+    ) {
+        const toast = await this.toastCtrl.create({
+            message: mensaje,
+            duration: 2500,
+            color: color,
+            position: 'top'
+        })
+        toast.present()
     }
 }

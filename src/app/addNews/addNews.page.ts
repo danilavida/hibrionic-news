@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
-// Importa TODOS los componentes Ionic usados en el HTML desde /standalone
 import {
     IonHeader,
     IonToolbar,
@@ -17,29 +16,24 @@ import {
     IonDatetime,
     IonButton,
     IonIcon,
-    // --- NUEVO: Importa los componentes de Card ---
     IonCard,
     IonCardHeader,
     IonCardTitle,
-    IonCardContent,
-    // --- Controladores (ya estaban bien importados aquí) ---
+    IonCardContent, // <-- Añadidos Card*
     LoadingController,
     AlertController
-} from '@ionic/angular/standalone' // O desde '@ionic/angular'
+} from '@ionic/angular/standalone'
 
-// Importa el servicio
 import { NoticiasService } from '../services/noticias.service'
 
 @Component({
     selector: 'app-addNews',
     templateUrl: 'addNews.page.html',
     styleUrls: ['addNews.page.scss'],
-    standalone: true, // Es Standalone
+    standalone: true,
     imports: [
-        // Array de imports para el TEMPLATE HTML
         FormsModule,
         CommonModule,
-        // Componentes Ionic Standalone usados en el template:
         IonHeader,
         IonToolbar,
         IonTitle,
@@ -54,7 +48,7 @@ import { NoticiasService } from '../services/noticias.service'
         IonDatetime,
         IonButton,
         IonIcon,
-        // --- NUEVO: Añade los componentes de Card aquí también ---
+        // --- Añadidos Card* ---
         IonCard,
         IonCardHeader,
         IonCardTitle,
@@ -62,33 +56,39 @@ import { NoticiasService } from '../services/noticias.service'
     ]
 })
 export class AddNewsPage {
-    // --- Propiedades ---
     noticiaTitulo: string = ''
     noticiaFecha: string = ''
     noticiaDescripcion: string = ''
+    noticiaImagenUrl: string = '' // <-- NUEVA propiedad para la URL
+
     isDatePickerOpen = false
 
-    // --- Constructor con Inyección de Dependencias ---
     constructor(
         private noticiasService: NoticiasService,
         private loadingCtrl: LoadingController,
         private alertCtrl: AlertController
     ) {}
 
-    // --- Métodos ---
     async agregarNoticia() {
+        // Validación: Solo título, fecha y descripción son obligatorios por ahora
         if (!this.noticiaTitulo || !this.noticiaFecha || !this.noticiaDescripcion) {
-            this.mostrarAlerta('Error', 'Por favor, completa todos los campos.')
+            this.mostrarAlerta(
+                'Error',
+                'Los campos Título, Fecha y Descripción son requeridos.'
+            )
             return
         }
 
         const loading = await this.loadingCtrl.create({ message: 'Guardando noticia...' })
         await loading.present()
 
+        // Prepara el objeto incluyendo la URL de la imagen (si existe)
         const nuevaNoticia = {
             titulo: this.noticiaTitulo,
             fecha: this.noticiaFecha,
-            descripcion: this.noticiaDescripcion
+            descripcion: this.noticiaDescripcion,
+            // Añade imagenUrl solo si el usuario la ingresó
+            ...(this.noticiaImagenUrl && { imagenUrl: this.noticiaImagenUrl })
         }
 
         try {
@@ -110,6 +110,7 @@ export class AddNewsPage {
         this.noticiaTitulo = ''
         this.noticiaFecha = ''
         this.noticiaDescripcion = ''
+        this.noticiaImagenUrl = '' // <-- Limpiar también la URL
     }
 
     async mostrarAlerta(titulo: string, mensaje: string) {
@@ -123,7 +124,6 @@ export class AddNewsPage {
 
     handleDateChange(event: any) {
         this.noticiaFecha = event.detail.value
-        console.log('Fecha seleccionada (ISO String):', this.noticiaFecha)
     }
 
     setOpen(isOpen: boolean) {
