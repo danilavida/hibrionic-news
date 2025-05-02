@@ -1,3 +1,37 @@
+ion-content {
+    // Asegura que ion-content intente ocupar toda la altura disponible dentro del host
+    // height: 100%;
+
+    // Estilo del Fondo con Gradiente Azul Suave
+    --background: linear-gradient(
+        to bottom,
+        rgba(var(--ion-color-primary-rgb), 0.4),
+        rgba(var(--ion-color-primary-rgb), 0.05) 3%,
+        #005eff 95% // O #ffffff / var(--ion-color-secondary)
+    );
+}
+
+/* --- Forzar Scroll en ion-content --- */
+// Intenta forzar el scroll en el contenedor interno de ion-content
+// usando la parte 'scroll' expuesta por Ionic.
+// ion-content::part(scroll) {
+//     overflow-y: scroll !important; // Fuerza el scroll vertical
+//     // -webkit-overflow-scrolling: touch !important; // Mejora scroll en iOS viejos (opcional)
+// }
+
+/* --- Centrar Título del Header --- */
+ion-header ion-toolbar ion-title {
+    text-align: center;
+    // Descomenta la alternativa si es necesario
+    /*
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+    padding: 0 50px;
+    */
+}
+
+/* --- Estilos de la Tarjeta (Card) --- */
 ion-card {
     margin-bottom: 16px;
     border-radius: 15px;
@@ -57,42 +91,11 @@ ion-card-content::after {
     clear: both;
 }
 
-ion-content {
-    --background: linear-gradient(
-        to bottom,
-        rgba(var(--ion-color-primary-rgb), 0.4),
-        rgba(var(--ion-color-primary-rgb), 0.05) 3%,
-        #005eff 95%
-    );
-}
-
-ion-header ion-toolbar ion-title {
-    text-align: center;
-
-    // Descomenta si text-align no es suficiente
-
-    // position: absolute;
-    // top: 0;
-    // left: 0;
-    // width: 100%;
-    // height: 100%;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    // padding: 0 50px;
-}
-
 /* --- Estilos para el Contenedor de la Lista en Escritorio --- */
-
-// Usamos una media query para aplicar estos estilos solo en pantallas
-// más grandes que un móvil típico (ej: 768px o 992px). Ajusta el valor si es necesario.
 @media (min-width: 768px) {
     .news-list-container {
-        // Define un ancho máximo para el contenido en pantallas grandes
-        max-width: 800px; // Puedes ajustar este valor (ej: 700px, 900px)
-
-        // Centra el contenedor horizontalmente cuando la pantalla sea más ancha que max-width
+        max-width: 800px;
         margin-left: auto;
         margin-right: auto;
     }
-} // Fin de la media query
+}
