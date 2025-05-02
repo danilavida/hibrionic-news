@@ -1,15 +1,67 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-title> Add News </ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
     <ion-header collapse="condense">
-        <ion-toolbar>
+        <ion-toolbar color="primary">
             <ion-title size="large">Add News</ion-title>
         </ion-toolbar>
     </ion-header>
 
-    <app-explore-container name="Add News page"></app-explore-container>
+    <div class="add-news-form-container">
+        <ion-list>
+            <ion-item>
+                <ion-label position="floating">Título</ion-label>
+                <ion-input type="text" [(ngModel)]="noticiaTitulo" name="titulo" required>
+                </ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Fecha</ion-label>
+                <ion-datetime-button datetime="datetime"></ion-datetime-button>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Descripción</ion-label>
+                <ion-textarea
+                    [(ngModel)]="noticiaDescripcion"
+                    name="descripcion"
+                    rows="5"
+                    required
+                >
+                </ion-textarea>
+            </ion-item>
+        </ion-list>
+
+        <ion-button
+            expand="block"
+            color="primary"
+            (click)="agregarNoticia()"
+            class="ion-margin-top"
+        >
+            <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+            Agregar Noticia
+        </ion-button>
+    </div>
+    <ion-modal
+        [keepContentsMounted]="true"
+        [isOpen]="isDatePickerOpen"
+        (didDismiss)="setOpen(false)"
+    >
+        <ng-template>
+            <ion-datetime
+                id="datetime"
+                presentation="date"
+                showDefaultButtons="true"
+                (ionChange)="handleDateChange($event)"
+                (ionCancel)="setOpen(false)"
+                (ionConfirm)="setOpen(false)"
+            >
+                <span slot="title">Selecciona la fecha</span>
+            </ion-datetime>
+        </ng-template>
+    </ion-modal>
 </ion-content>

@@ -1,0 +1,65 @@
+/* src/app/addNews/addNews.page.scss */
+
+/* --- Estilos del Fondo con Gradiente Azul Suave --- */
+ion-content {
+    // Aplicamos el gradiente directamente al fondo
+    // Ajusta los colores/paradas según tu preferencia
+    --background: linear-gradient(
+        to bottom,
+        rgba(var(--ion-color-primary-rgb), 0.4),
+        // Azul primario más opaco al inicio
+        rgba(var(--ion-color-primary-rgb), 0.05) 30%,
+        // Se desvanece rápido
+        #ffffff 70% // Termina en blanco (o var(--ion-color-secondary) para gris claro)
+    );
+}
+
+/* --- Centrar Título del Header --- */
+ion-header ion-toolbar ion-title {
+    text-align: center;
+    // Descomenta la alternativa si text-align no es suficiente
+    /*
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+    padding: 0 50px;
+    */
+}
+
+/* --- Estilos para el Contenedor del Formulario en Escritorio --- */
+@media (min-width: 768px) {
+    .add-news-form-container {
+        max-width: 600px; // Ancho máximo del formulario en escritorio
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 20px; // Espacio superior opcional
+    }
+}
+
+/* --- Estilos específicos del formulario (Opcional) --- */
+ion-list {
+    // Quita fondos para que se vea el gradiente
+    background: transparent;
+    --ion-item-background: transparent;
+    padding-top: 10px; // Un poco de espacio antes del primer item
+}
+
+ion-item {
+    // --border-color: rgba(var(--ion-color-medium-rgb), 0.3); // Borde sutil opcional
+    // border-radius: 8px; // Esquinas redondeadas opcional
+    margin-bottom: 12px; // Espacio entre items del formulario
+    // Para que el fondo transparente aplique correctamente:
+    --background: transparent;
+}
+
+// Ajuste para que el label flotante tenga buen contraste
+ion-item.item-label-floating .label-floating {
+    color: var(--ion-color-medium-shade);
+}
+
+// Puedes añadir más estilos para los inputs, textarea, etc. si lo deseas
+ion-input,
+ion-textarea {
+    // background-color: rgba(255, 255, 255, 0.8); // Fondo semi-transparente opcional
+    // border-radius: 5px;
+}
