@@ -14,7 +14,7 @@ import { NewsPageRoutingModule } from './news-routing.module'
         FormsModule,
         ExploreContainerComponentModule,
         NewsPageRoutingModule,
-        NewsPage // Importar NewsPage aquí
+        NewsPage
     ],
     declarations: []
 })

@@ -1,21 +1,16 @@
-/* src/app/addNews/addNews.page.scss */
-
-/* --- Estilos del Fondo con Gradiente Azul Suave --- */
 ion-content {
     --background: linear-gradient(
         to bottom,
         rgba(var(--ion-color-primary-rgb), 0.4),
         rgba(var(--ion-color-primary-rgb), 0.05) 30%,
-        #ffffff 70% // <- O var(--ion-color-secondary)
+        #ffffff 70%
     );
 }
 
-/* --- Centrar Título del Header --- */
 ion-header ion-toolbar ion-title {
     text-align: center;
 }
 
-/* --- Estilos para el Contenedor del Formulario en Escritorio --- */
 @media (min-width: 768px) {
     .add-news-form-container {
         max-width: 600px;
@@ -25,43 +20,32 @@ ion-header ion-toolbar ion-title {
     }
 }
 
-/* --- Estilos para la Tarjeta del Formulario --- */
 .add-news-form-container ion-card {
-    // Fondo para la tarjeta (puedes probar diferentes opacidades o colores)
-    // background-color: rgba(255, 255, 255, 0.85); // Blanco semi-transparente
-    background-color: var(--ion-color-light); // O usar el gris claro de la paleta
+    background-color: var(--ion-color-light);
 
-    border-radius: 15px; // Mismo radio que las tarjetas de noticias
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Sombra suave
-    border: 1px solid var(--ion-color-medium-tint); // Borde sutil opcional
-    margin-bottom: 20px; // Margen inferior para la tarjeta
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--ion-color-medium-tint);
+    margin-bottom: 20px;
 }
 
 .add-news-form-container ion-card-header {
-    // Puedes añadir padding aquí si quieres más espacio para el título de la tarjeta
-    padding-bottom: 0; // Quizás menos padding aquí
+    padding-bottom: 0;
 }
 
 .add-news-form-container ion-card-content {
-    // Padding dentro del contenido de la tarjeta
     padding-top: 0;
 }
 
-/* --- Estilos específicos del formulario DENTRO de la tarjeta --- */
 .add-news-form-container ion-list {
-    // La lista dentro de la tarjeta puede tener fondo transparente
     background: transparent;
-    // Quitamos padding superior ya que el card-content puede tenerlo
     padding-top: 0;
 }
 
 .add-news-form-container ion-item {
-    // Fondo transparente para los items dentro de la tarjeta
     --background: transparent;
-    margin-bottom: 16px; // Más espacio entre items
-    // Puedes añadir una línea inferior sutil si quieres separar los campos
+    margin-bottom: 16px;
     --border-color: rgba(var(--ion-color-medium-rgb), 0.3);
-    // Asegura que no haya padding extra que descuadre
     --inner-padding-end: 0px;
     --inner-padding-start: 0px;
     padding-left: 0;
@@ -72,16 +56,6 @@ ion-header ion-toolbar ion-title {
     color: var(--ion-color-medium-shade);
 }
 
-// Estilos opcionales para Inputs/Textarea dentro de la tarjeta
-.add-news-form-container ion-input,
-.add-news-form-container ion-textarea {
-    // Quizás un fondo muy sutil para el campo de entrada
-    // background-color: rgba(var(--ion-color-medium-rgb), 0.1);
-    // border-radius: 5px;
-    // padding: 5px 8px !important; // Forzar padding si es necesario
-}
-
-// Ajuste al botón dentro de la tarjeta
 .add-news-form-container ion-button {
-    margin-top: 16px; // Margen sobre el botón
+    margin-top: 16px;
 }

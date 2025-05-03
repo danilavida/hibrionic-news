@@ -7,10 +7,6 @@ import { NoticiasService } from '../services/noticias.service'
 import { Noticia } from '../models/noticia.model'
 
 import {
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
     IonCard,
     IonCardHeader,
     IonCardTitle,
@@ -29,10 +25,6 @@ import {
     standalone: true,
     imports: [
         CommonModule,
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonContent,
         IonCard,
         IonCardHeader,
         IonCardTitle,
@@ -45,7 +37,6 @@ import {
 export class NewsPage implements OnInit {
     public noticias$: Observable<Noticia[]>
 
-    // --- 1. Inyecta EnvironmentInjector usando inject() ---
     private environmentInjector = inject(EnvironmentInjector)
 
     constructor(
@@ -60,7 +51,6 @@ export class NewsPage implements OnInit {
         this.noticias$ = this.noticiasService.getNoticias()
     }
 
-    // Método principal que muestra la alerta (sin cambios aquí)
     async eliminarNoticia(noticiaParaEliminar: Noticia) {
         console.log('Debug: Intentando eliminar:', noticiaParaEliminar)
         console.log('Debug: ID recibido para eliminar:', noticiaParaEliminar.id)
@@ -84,7 +74,6 @@ export class NewsPage implements OnInit {
                     text: 'Eliminar',
                     cssClass: 'danger',
                     handler: () => {
-                        // Llama al método privado
                         console.log(
                             `Debug: Alert handler confirmado para ID: ${noticiaParaEliminar.id!}`
                         )
@@ -96,30 +85,24 @@ export class NewsPage implements OnInit {
         await alert.present()
     }
 
-    // Método privado que ejecuta la lógica de borrado
     private _borrarNoticiaConfirmado(id: string) {
-        // --- 2. Ejecuta la llamada al servicio DENTRO de runInContext ---
         this.environmentInjector.runInContext(async () => {
             try {
                 console.log(
                     `Debug: _borrarNoticiaConfirmado - Llamando a deleteNoticia con ID: ${id}`
                 )
-                // La llamada al servicio ahora está envuelta
                 await this.noticiasService.deleteNoticia(id)
                 console.log(
                     'Debug: _borrarNoticiaConfirmado - Llamada a deleteNoticia completada.'
                 )
-                // Mostrar toast también necesita contexto si usa DI internamente, así que lo dejamos dentro
                 this.mostrarToast('Noticia eliminada correctamente.', 'success')
             } catch (error) {
                 console.error('Debug: ERROR DETALLADO en _borrarNoticiaConfirmado:', error)
-                // Mostrar toast también necesita contexto si usa DI internamente
                 this.mostrarToast('Error al eliminar la noticia.', 'danger')
             }
-        }) // --- Fin de runInContext ---
+        })
     }
 
-    // Método auxiliar para mostrar Toast (sin cambios)
     async mostrarToast(
         mensaje: string,
         color: 'success' | 'danger' | 'warning' | 'primary'

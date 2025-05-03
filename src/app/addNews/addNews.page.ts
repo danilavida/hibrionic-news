@@ -19,7 +19,7 @@ import {
     IonCard,
     IonCardHeader,
     IonCardTitle,
-    IonCardContent, // <-- Añadidos Card*
+    IonCardContent,
     LoadingController,
     AlertController
 } from '@ionic/angular/standalone'
@@ -48,7 +48,6 @@ import { NoticiasService } from '../services/noticias.service'
         IonDatetime,
         IonButton,
         IonIcon,
-        // --- Añadidos Card* ---
         IonCard,
         IonCardHeader,
         IonCardTitle,
@@ -59,7 +58,7 @@ export class AddNewsPage {
     noticiaTitulo: string = ''
     noticiaFecha: string = ''
     noticiaDescripcion: string = ''
-    noticiaImagenUrl: string = '' // <-- NUEVA propiedad para la URL
+    noticiaImagenUrl: string = ''
 
     isDatePickerOpen = false
 
@@ -70,7 +69,6 @@ export class AddNewsPage {
     ) {}
 
     async agregarNoticia() {
-        // Validación: Solo título, fecha y descripción son obligatorios por ahora
         if (!this.noticiaTitulo || !this.noticiaFecha || !this.noticiaDescripcion) {
             this.mostrarAlerta(
                 'Error',
@@ -82,12 +80,10 @@ export class AddNewsPage {
         const loading = await this.loadingCtrl.create({ message: 'Guardando noticia...' })
         await loading.present()
 
-        // Prepara el objeto incluyendo la URL de la imagen (si existe)
         const nuevaNoticia = {
             titulo: this.noticiaTitulo,
             fecha: this.noticiaFecha,
             descripcion: this.noticiaDescripcion,
-            // Añade imagenUrl solo si el usuario la ingresó
             ...(this.noticiaImagenUrl && { imagenUrl: this.noticiaImagenUrl })
         }
 
@@ -110,7 +106,7 @@ export class AddNewsPage {
         this.noticiaTitulo = ''
         this.noticiaFecha = ''
         this.noticiaDescripcion = ''
-        this.noticiaImagenUrl = '' // <-- Limpiar también la URL
+        this.noticiaImagenUrl = ''
     }
 
     async mostrarAlerta(titulo: string, mensaje: string) {
